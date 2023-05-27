@@ -16,7 +16,7 @@ export default function load_routes (router: Router) {
   const handle_file = (item: fs.Dirent, path_prefix: string) => {
     if (item.name.endsWith(".js") || item.name.endsWith(".ts")) {
       const api_name = item.name.split(".").slice(0, -1).join(".").replace(/^_/, ":");
-      const api_path = api_name === "index" ? path_prefix : (path_prefix + api_name).replace(/\/*$/g, "/");
+      const api_path = api_name === "index" ? path_prefix : (path_prefix + api_name).replace(/\/*$/g, "/").replace(/\/$/, "");
       const file_path = path.join(root_path, path_prefix.split(/\/|\\/).map(s => s.replace(/^:/, "_")).join("/"), item.name);
       let configuration;
       try {
